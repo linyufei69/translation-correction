@@ -1,18 +1,33 @@
 # 批改翻译（Translation Correction）Skill
 
-一个给 WorkBuddy 用的固定翻译批改流程技能。发原文+译文，按固定模板产出：三列对照表、扣分明细（含近义词详细辨析）、得分、修改后全文、问题模式总结。
+一个平台无关的翻译批改固定流程。发原文+译文，按固定模板产出：三列对照表、扣分明细（含近义词详细辨析）、得分、修改后全文、问题模式总结。
 
 适用：英译汉 / 汉译英双向；CATTI 笔译备考、MTI 翻译练习、日常翻译训练。
 
-## 安装
+`SKILL.md` 是一份纯 Markdown 提示词，不绑定任何特定工具。下面列出在各平台的加载方式。
 
-把本仓库的 `translation-correction/` 文件夹（内含 `SKILL.md`）复制到你的 WorkBuddy 用户技能目录：
+## 安装 / 加载方式（按你用的工具选一种）
 
+**WorkBuddy**
 ```
-~/.workbuddy/skills/批改翻译/
+git clone https://github.com/linyufei69/translation-correction.git ~/.workbuddy/skills/批改翻译
 ```
+重启/刷新 WorkBuddy 后，说「批改翻译」即自动生效。
 
-即最终路径为 `~/.workbuddy/skills/批改翻译/SKILL.md`。重启/刷新 WorkBuddy 后即可生效。
+**Cursor**
+把仓库内容放进项目规则的某种引用方式，例如：
+- 在仓库根建 `.cursor/rules/translation-correction.mdc`，内容粘贴 `SKILL.md` 全文；或
+- 把 `SKILL.md` 放进一个文件夹，在对话里用 `@文件夹路径` 引用。
+
+**Claude Code / Claude 桌面版**
+- 把 `SKILL.md` 正文合并进项目的 `CLAUDE.md`；或
+- 放进你常用的 skills 目录后引用。
+
+**ChatGPT / 通用网页 LLM（无技能机制）**
+直接把 `SKILL.md` 的**正文**（去掉顶部 `---` 之间的 frontmatter）当作系统提示词 / 首条指令粘贴进对话。之后每次贴原文+译文即可按流程批改。
+
+**任意支持 Markdown 系统提示词的 agent**
+把 `SKILL.md` 作为系统提示词注入即可。frontmatter 在多数平台会被忽略或当元数据，无害。
 
 ## 用法
 
@@ -35,7 +50,7 @@
 ## 自定义
 
 - **用自己的模板**：调用时提供你自己的批改模板 docx 路径，技能会参照其版式生成 docx 正稿。
-- **出 docx 正稿**：明确要求「生成 docx」即可。
+- **出 docx 正稿**：明确要求「生成 docx」即可（通用方案用 `python-docx`，见 SKILL.md 第 7 节）。
 - **历史记录**：要求「记录」，技能会把每次得分与高频问题追加到记录文件，便于跨会话追踪进步。
 
 ## 评分档位
